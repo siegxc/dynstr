@@ -1,6 +1,5 @@
 #ifndef _DYNSTR_H
 #define _DYNSTR_H
-#define DYNSTR_IMPLEMENTATION
 
 #include <errno.h>
 #include <stdlib.h>
