@@ -31,6 +31,7 @@ int DynStr_push_str(DynStr *ds, char *str);
 int DynStr_push_char(DynStr *ds, char ch);
 int DynStr_push_array(DynStr *ds, char *arr, size_t len);
 int DynStr_push_dynstr(DynStr *ds, DynStr *ads);
+char *DynStr_raw_str(DynStr *ds);
 void DynStr_free(DynStr *ds);
 
 #ifdef DYNSTR_IMPLEMENTATION
@@ -133,6 +134,10 @@ int DynStr_push_array(DynStr *ds, char *arr, size_t len) {
 
 int DynStr_push_dynstr(DynStr *ds, DynStr *ads) {
   return DynStr_push_str(ds, ads->ptr);
+}
+
+char *DynStr_raw_str(DynStr *ds) {
+  return ds->ptr;
 }
 
 #endif

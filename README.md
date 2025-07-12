@@ -2,7 +2,7 @@
 Simple and 🚀BLAZINGLY🚀 fast library for working with dynamic strings in C.
 
 # Tutorial
-Dynstr provides 9 🚀BLAZINGLY🚀 fast functions for working with dynamic string.
+Dynstr provides 10 🚀BLAZINGLY🚀 fast functions for working with dynamic string.
 A dynamic string is a regular C string allocated on the heap.
 
 ### DynStr_init
@@ -57,6 +57,13 @@ Pushes dynamic string at the end of a dynamic string.
 ```C
 DynStr_push_dynstr(&ds1, &ds2); // ds2 pushed at the end of the ds1
 ```
+
+### DynStr_raw_str()
+Returns pointer to raw C string
+```C
+printf("%s", DynStr_raw_str(&ds));
+```
+
 ### DynStr_free
 Deallocates a string from the heap and sets its data pointer to NULL to avoid double-free and use-after-free vulnerabilities.
 ```C
