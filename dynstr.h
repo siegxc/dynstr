@@ -10,13 +10,6 @@
 #define DYNSTR_SUB_CAPACITY 1
 #define DYNSTR_ABSOLUTE_CAPACITY 2
 
-#define DS_LENGTH ds->length // DS stands for dynamic string
-#define DS_CAPACITY ds->capacity
-#define DS_PTR ds->ptr
-#define DS_ENDPTR (DS_PTR + DS_LENGTH)
-#define DS_END *DS_ENDPTR
-#define ALLOC_CHECK_NULL(ptr) if(!ptr) return errno;
-
 typedef struct {
   char *ptr;
   size_t length;
@@ -32,9 +25,18 @@ int DynStr_push_char(DynStr *ds, char ch);
 int DynStr_push_array(DynStr *ds, char *arr, size_t len);
 int DynStr_push_dynstr(DynStr *ds, DynStr *ads);
 char *DynStr_raw_str(DynStr *ds);
+int DynStr_length(DynStr *ds);
+int DynStr_capacity(DynStr *ds);
 void DynStr_free(DynStr *ds);
 
 #ifdef DYNSTR_IMPLEMENTATION
+
+#define DS_LENGTH ds->length // DS stands for dynamic string
+#define DS_CAPACITY ds->capacity
+#define DS_PTR ds->ptr
+#define DS_ENDPTR (DS_PTR + DS_LENGTH)
+#define DS_END *DS_ENDPTR
+#define ALLOC_CHECK_NULL(ptr) if(!ptr) return errno;
 
 int DynStr_init(DynStr *ds) {
   DS_PTR = (char*)malloc(1);
@@ -137,8 +139,23 @@ int DynStr_push_dynstr(DynStr *ds, DynStr *ads) {
 }
 
 char *DynStr_raw_str(DynStr *ds) {
-  return ds->ptr;
+  return DS_PTR;
 }
+
+int DynStr_length(DynStr *ds) {
+  return DS_LENGTH;
+}
+
+int DynStr_capacity(DynStr *ds) {
+  return DS_CAPACITY;
+}
+
+#undef DS_CAPACITY
+#undef DS_END
+#undef DS_ENDPTR
+#undef DS_LENGTH
+#undef DS_PTR
+#undef ALLOC_CHECK_NULL
 
 #endif
 
